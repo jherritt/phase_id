@@ -6,6 +6,9 @@ import plotly.express as px
 import json
 import os
 
+# ── Page Config (must be first Streamlit command) ─────────────────────────────
+st.set_page_config(page_title="Phase_ID.ai", layout="wide")
+
 # Resolve paths relative to this script file
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -31,7 +34,6 @@ PH2_TICKERS_CSV = os.path.join(DATA_DIR, f"{prefix}_phase2_tickers.csv")
 PH2_NAMES_CSV   = os.path.join(DATA_DIR, f"{prefix}_phase2_stock_tickers_names.csv")
 
 # ── Page Setup ────────────────────────────────────────────────────────────────
-st.set_page_config(page_title=f"Phase_ID.ai - {selected_index}", layout="wide")
 st.title(f"Phase_ID.ai – {selected_index}")
 st.markdown(
     """
