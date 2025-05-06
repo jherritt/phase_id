@@ -6,3 +6,7 @@
 __pycache__/
 *.py[cod]
 *.pkl
+
+# Allow data files in the data/ folder
+!data/*.pkl
+!data/*.csv
