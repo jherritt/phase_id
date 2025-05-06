@@ -13,21 +13,23 @@ st.set_page_config(page_title="Phase_ID.ai", layout="wide")
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 # ── Index Selector ─────────────────────────────────────────────────────────────
-index_options = ["sp500", "sp400", "nasdaq", "russell"]
+index_options = ["SP500", "SP400", "NASDAQ", "RUSSELL"]
 selected_index = st.sidebar.selectbox("Choose Index:", index_options)
 prefix = selected_index.lower()
 
 # ── File Paths ───────────────────────────────────────────────────────────────
 #
 # ── Data Directory ─────────────────────────────────────────────────────────────
-script_data = os.path.join(BASE_DIR, "data")
-parent_data = os.path.abspath(os.path.join(BASE_DIR, os.pardir, "data"))
+# Check script folder data, then working directory data
+script_data = os.path.join(os.path.dirname(os.path.realpath(__file__)), "data")
+cwd_data = os.path.join(os.getcwd(), "data")
 if os.path.isdir(script_data):
     DATA_DIR = script_data
-elif os.path.isdir(parent_data):
-    DATA_DIR = parent_data
+elif os.path.isdir(cwd_data):
+    DATA_DIR = cwd_data
 else:
-    DATA_DIR = BASE_DIR
+    st.error(f"No data directory found. Checked:\n  {script_data}\n  {cwd_data}")
+    st.stop()
 PH1_PRICE_CSV   = os.path.join(DATA_DIR, f"{prefix}_phase1_price_df.csv")
 PH1_MA_PKL      = os.path.join(DATA_DIR, f"{prefix}_phase1_moving_averages.pkl")
 PH1_TICKERS_CSV = os.path.join(DATA_DIR, f"{prefix}_phase1_tickers.csv")
