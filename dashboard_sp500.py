@@ -18,9 +18,14 @@ selected_index = st.sidebar.selectbox("Choose Index:", index_options)
 prefix = selected_index.lower()
 
 # ── File Paths ───────────────────────────────────────────────────────────────
-data_subdir = os.path.join(BASE_DIR, "data")
-if os.path.isdir(data_subdir):
-    DATA_DIR = data_subdir
+#
+# ── Data Directory ─────────────────────────────────────────────────────────────
+script_data = os.path.join(BASE_DIR, "data")
+parent_data = os.path.abspath(os.path.join(BASE_DIR, os.pardir, "data"))
+if os.path.isdir(script_data):
+    DATA_DIR = script_data
+elif os.path.isdir(parent_data):
+    DATA_DIR = parent_data
 else:
     DATA_DIR = BASE_DIR
 PH1_PRICE_CSV   = os.path.join(DATA_DIR, f"{prefix}_phase1_price_df.csv")
