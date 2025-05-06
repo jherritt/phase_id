@@ -13,7 +13,7 @@ st.set_page_config(page_title="Phase_ID.ai", layout="wide")
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 # ── Index Selector ─────────────────────────────────────────────────────────────
-index_options = ["SP500", "SP400", "NASDAQ", "RUSSELL"]
+index_options = ["sp500", "sp400", "nasdaq", "russell"]
 selected_index = st.sidebar.selectbox("Choose Index:", index_options)
 prefix = selected_index.lower()
 
@@ -64,7 +64,8 @@ def normalize_datetime_index(df):
 price_df1 = normalize_datetime_index(pd.read_csv(PH1_PRICE_CSV, index_col=0))
 with open(PH1_MA_PKL, "rb") as f:
     moving_averages1 = pickle.load(f)
-for df in moving_averages1.values(): normalize_datetime_index(df)
+for df in moving_averages1.values():
+    normalize_datetime_index(df)
 
 df_p1 = pd.read_csv(PH1_TICKERS_CSV)
 if "Ticker" in df_p1.columns:
@@ -86,7 +87,8 @@ except:
 price_df2 = normalize_datetime_index(pd.read_csv(PH2_PRICE_CSV, index_col=0))
 with open(PH2_MA_PKL, "rb") as f:
     moving_averages2 = pickle.load(f)
-for df in moving_averages2.values(): normalize_datetime_index(df)
+for df in moving_averages2.values():
+    normalize_datetime_index(df)
 
 df_p2 = pd.read_csv(PH2_TICKERS_CSV)
 if "Ticker" in df_p2.columns:
