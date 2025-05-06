@@ -6,21 +6,33 @@ import plotly.express as px
 import json
 import os
 
-# ── File Paths ───────────────────────────────────────────────────────────────
-DATA_DIR = "data"
-PH1_PRICE_CSV   = os.path.join(DATA_DIR, "phase1_price_df.csv")
-PH1_MA_PKL      = os.path.join(DATA_DIR, "phase1_moving_averages.pkl")
-PH1_TICKERS_CSV = os.path.join(DATA_DIR, "phase1_tickers.csv")
-PH1_NAMES_CSV   = os.path.join(DATA_DIR, "phase1_stock_tickers_names.csv")
+# Resolve paths relative to this script file
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
-PH2_PRICE_CSV   = os.path.join(DATA_DIR, "phase2_price_df.csv")
-PH2_MA_PKL      = os.path.join(DATA_DIR, "phase2_moving_averages.pkl")
-PH2_TICKERS_CSV = os.path.join(DATA_DIR, "phase2_tickers.csv")
-PH2_NAMES_CSV   = os.path.join(DATA_DIR, "phase2_stock_tickers_names.csv")
+# ── Index Selector ─────────────────────────────────────────────────────────────
+index_options = ["SP500", "SP400", "NASDAQ", "RUSSELL"]
+selected_index = st.sidebar.selectbox("Choose Index:", index_options)
+prefix = selected_index.lower()
+
+# ── File Paths ───────────────────────────────────────────────────────────────
+data_subdir = os.path.join(BASE_DIR, "data")
+if os.path.isdir(data_subdir):
+    DATA_DIR = data_subdir
+else:
+    DATA_DIR = BASE_DIR
+PH1_PRICE_CSV   = os.path.join(DATA_DIR, f"{prefix}_phase1_price_df.csv")
+PH1_MA_PKL      = os.path.join(DATA_DIR, f"{prefix}_phase1_moving_averages.pkl")
+PH1_TICKERS_CSV = os.path.join(DATA_DIR, f"{prefix}_phase1_tickers.csv")
+PH1_NAMES_CSV   = os.path.join(DATA_DIR, f"{prefix}_phase1_stock_tickers_names.csv")
+
+PH2_PRICE_CSV   = os.path.join(DATA_DIR, f"{prefix}_phase2_price_df.csv")
+PH2_MA_PKL      = os.path.join(DATA_DIR, f"{prefix}_phase2_moving_averages.pkl")
+PH2_TICKERS_CSV = os.path.join(DATA_DIR, f"{prefix}_phase2_tickers.csv")
+PH2_NAMES_CSV   = os.path.join(DATA_DIR, f"{prefix}_phase2_stock_tickers_names.csv")
 
 # ── Page Setup ────────────────────────────────────────────────────────────────
-st.set_page_config(page_title="Phase_ID.ai - SP500", layout="wide")
-st.title("Phase_ID.ai – SP500")
+st.set_page_config(page_title=f"Phase_ID.ai - {selected_index}", layout="wide")
+st.title(f"Phase_ID.ai – {selected_index}")
 st.markdown(
     """
     Choose a phase and focus on a ticker (or All).  
@@ -87,7 +99,7 @@ except:
 
 # ── Phase Selector ─────────────────────────────────────────────────────────────
 st.sidebar.header("Configuration")
-phase = st.sidebar.selectbox("Choose Phase:", ["Phase 1 - Inclining","Phase 2 - Declining"])
+phase = st.sidebar.selectbox("Choose Phase:", ["Phase 1 - Advancing","Phase 2 - Declining"])
 if phase.startswith("Phase 1"):
     price_df, moving_averages, tickers, names = price_df1, moving_averages1, tickers1, names1
     fb_file = os.path.join(DATA_DIR, "feedback_phase1.json")
