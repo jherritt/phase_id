@@ -5,6 +5,8 @@ import pickle
 import plotly.express as px
 import json
 import os
+from functools import lru_cache
+import plotly.graph_objects as go
 
 # ── Page Config (must be first Streamlit command) ─────────────────────────────
 st.set_page_config(page_title="Phase_ID.ai", layout="wide")
@@ -60,6 +62,32 @@ def normalize_datetime_index(df):
         df.index = pd.to_datetime(idx, errors="coerce")
     df.sort_index(inplace=True)
     return df
+
+@st.cache_data
+def make_chart(df_full, ticker):
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=df_full["Date"], y=df_full["Price"], name="Price"))
+    fig.add_trace(go.Scatter(x=df_full["Date"], y=df_full["50d MA"], name="50d MA"))
+    fig.add_trace(go.Scatter(x=df_full["Date"], y=df_full["200d MA"], name="200d MA"))
+    fig.update_layout(title=f"Last 2 Years for {ticker}", height=400, showlegend=True)
+    return fig
+
+@st.cache_data
+def make_chart_arrays(_dates, prices, ma50, ma200, ticker):
+    dates = _dates
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=dates, y=prices, name="Price"))
+    fig.add_trace(go.Scatter(x=dates, y=ma50, name="50d MA"))
+    fig.add_trace(go.Scatter(x=dates, y=ma200, name="200d MA"))
+    fig.update_layout(
+        title=f"{ticker}: Last 2Y",
+        height=350,
+        showlegend=True,
+        xaxis_title="Date",
+        yaxis_title="Price",
+        hovermode="x unified"
+    )
+    return fig
 
 # ── Load Phase Data ───────────────────────────────────────────────────────────
 # Phase 1
@@ -150,38 +178,35 @@ display_tickers = display
 # start = st.session_state.page_idx * PAGE_SIZE
 # display_tickers = display[start:start+PAGE_SIZE]
 
+# ── Pre-slice recent series for all tickers ─────────────────────────────────────
+price_recent = price_df.last("730D")
+ma50_recent  = {t: moving_averages["50d"][t].last("730D")  for t in tickers}
+ma200_recent = {t: moving_averages["200d"][t].last("730D") for t in tickers}
+dates = price_recent.index
+
 # ── Plot & Feedback ──────────────────────────────────────────────────────────
 for t in display_tickers:
     cname = names.get(t, "—")
-    flagged = feedback.get(t, False)
-    st.subheader(f"{t} | {cname} " + ("🚩 Flagged" if flagged else ""))
-
-    df_full = pd.DataFrame({
-        'Price': price_df[t].last('730D'),
-        '50d MA': moving_averages['50d'][t].last('730D'),
-        '200d MA': moving_averages['200d'][t].last('730D')
-    }).reset_index().rename(columns={'index':'Date'})
-
-    col1, col2 = st.columns([5,1], gap='large')
-    with col1:
-        fig = px.line(df_full, x='Date', y=['Price','50d MA','200d MA'],
-                      title='Last 2 Years', labels={'value':'Price','variable':''},
-                      template='plotly_white', height=600)
-        fig.update_layout(legend=dict(y=0.5, traceorder='reversed'))
+    with st.expander(f"{t} | {cname}", expanded=True):
+        # Pull pre-sliced arrays
+        prices = price_recent[t].values
+        ma50    = ma50_recent[t].values
+        ma200   = ma200_recent[t].values
+        # Build and render chart
+        fig = make_chart_arrays(dates, prices, ma50, ma200, t)
         st.plotly_chart(fig, use_container_width=True)
-    with col2:
+        # feedback buttons
+        flagged = feedback.get(t, False)
         if not flagged:
             if st.button('Flag as Incorrect', key=f'flag_{phase}_{t}'):
                 feedback[t] = True
                 with open(fb_file,'w') as f: json.dump(feedback,f,indent=2)
                 st.success(f"Flagged {t}.")
         else:
-            st.markdown('**Marked as Incorrect**')
             if st.button('Unflag', key=f'unflag_{phase}_{t}'):
                 feedback.pop(t,None)
                 with open(fb_file,'w') as f: json.dump(feedback,f,indent=2)
                 st.success(f"Unflagged {t}.")
-    st.markdown('---')
 
 # ── Pagination Controls ───────────────────────────────────────────────────────
 # if focus == 'All':
