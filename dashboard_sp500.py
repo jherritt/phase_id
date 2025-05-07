@@ -136,17 +136,19 @@ st.session_state.last_phase = phase
 
 focus = st.sidebar.radio("Focus Ticker:", options, index=0)
 
-# set focus and pagination
+# set focus (show all charts on one page)
 display = [focus] if focus != "All" else tickers
-PAGE_SIZE = 5
-# pagination index in session state
-if "page_idx" not in st.session_state: st.session_state.page_idx = 0
-# clamp and paginate
-total = len(display)
-pages = max((total-1)//PAGE_SIZE + 1, 1)
-st.session_state.page_idx = min(max(st.session_state.page_idx, 0), pages-1)
-start = st.session_state.page_idx * PAGE_SIZE
-display_tickers = display[start:start+PAGE_SIZE]
+# display all tickers at once
+display_tickers = display
+
+# -- Pagination logic (commented out) --
+# PAGE_SIZE = 5
+# if "page_idx" not in st.session_state: st.session_state.page_idx = 0
+# total = len(display)
+# pages = max((total-1)//PAGE_SIZE + 1, 1)
+# st.session_state.page_idx = min(max(st.session_state.page_idx, 0), pages-1)
+# start = st.session_state.page_idx * PAGE_SIZE
+# display_tickers = display[start:start+PAGE_SIZE]
 
 # ── Plot & Feedback ──────────────────────────────────────────────────────────
 for t in display_tickers:
@@ -182,13 +184,13 @@ for t in display_tickers:
     st.markdown('---')
 
 # ── Pagination Controls ───────────────────────────────────────────────────────
-if focus == 'All':
-    col_prev, col_page, col_next = st.columns([1,2,1])
-    with col_prev:
-        if st.button('Previous', disabled=st.session_state.page_idx==0):
-            st.session_state.page_idx -=1
-    with col_page:
-        st.markdown(f"**Page {st.session_state.page_idx+1} of {pages}**")
-    with col_next:
-        if st.button('Next', disabled=st.session_state.page_idx>=pages-1):
-            st.session_state.page_idx +=1
+# if focus == 'All':
+#     col_prev, col_page, col_next = st.columns([1,2,1])
+#     with col_prev:
+#         if st.button('Previous', disabled=st.session_state.page_idx==0):
+#             st.session_state.page_idx -=1
+#     with col_page:
+#         st.markdown(f"**Page {st.session_state.page_idx+1} of {pages}**")
+#     with col_next:
+#         if st.button('Next', disabled=st.session_state.page_idx>=pages-1):
+#             st.session_state.page_idx +=1
