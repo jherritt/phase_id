@@ -1,33 +1,37 @@
-0,Company Name
-TSLA,"Tesla, Inc."
-ORCL,Oracle Corporation
-AMD,"Advanced Micro Devices, Inc."
+Ticker,Company Name
+GOOG,Alphabet Inc. Class C Capital Stock
+TSLA,"Tesla, Inc. Common Stock"
+ORCL,Oracle Corp
+AMD,Advanced Micro Devices
 ADBE,Adobe Inc.
 CRM,"Salesforce, Inc."
+AMGN,Amgen Inc
 CAT,Caterpillar Inc.
-NOW,"ServiceNow, Inc."
+NOW,"SERVICENOW, INC."
+REGN,Regeneron Pharmaceuticals Inc
 KKR,KKR & Co. Inc.
 FI,"Fiserv, Inc."
-TGT,Target Corporation
-BDX,"Becton, Dickinson and Company"
-MSI,"Motorola Solutions, Inc."
-PCAR,PACCAR Inc
-ROST,"Ross Stores, Inc."
+EQIX,"Equinix, Inc. Common Stock REIT"
+NXPI,NXP Semiconductors N.V.
+MSI,"Motorola Solutions, Inc. New"
+PCAR,Paccar Inc
+ROST,Ross Stores Inc
+NSC,Norfolk Southern Corp.
 GWW,"W.W. Grainger, Inc."
-DHI,"D.R. Horton, Inc."
+DHI,D.R. Horton Inc.
+LHX,"L3Harris Technologies, Inc."
 URI,"United Rentals, Inc."
-ODFL,"Old Dominion Freight Line, Inc."
-LEN,Lennar Corporation
+LEN,Lennar Corporation Class A
 FICO,Fair Isaac Corporation
-IT,"Gartner, Inc."
-MLM,"Martin Marietta Materials, Inc."
-IRM,Iron Mountain Incorporated
+MLM,Martin Marietta Materials
+IRM,Iron Mountain Inc.
+NTAP,"NetApp, Inc"
 FSLR,"First Solar, Inc."
 WST,"West Pharmaceutical Services, Inc."
 NVR,"NVR, Inc."
 HUBB,Hubbell Incorporated
-WAT,Waters Corporation
 BLDR,"Builders FirstSource, Inc."
+KIM,Kimco Realty Corp.
 EMN,Eastman Chemical Company
-EPAM,"EPAM Systems, Inc."
-BIO,"Bio-Rad Laboratories, Inc."
+BIO,"Bio-Rad Laboratories, Inc.Class A"
+DAY,"Dayforce, Inc."

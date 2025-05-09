@@ -1,10 +1,12 @@
 Ticker,Company Name
 ADBE,Adobe Inc.
 AMD,Advanced Micro Devices
+AMGN,Amgen Inc
 BAH,Booz Allen Hamilton Holding Corporation
 BIO,"Bio-Rad Laboratories, Inc.Class A"
 BLD,TopBuild Corp. Common Stock
 BLDR,"Builders FirstSource, Inc."
+BWXT,"BWX Technologies, Inc."
 CACI,CACI INTERNATIONAL CLA
 CART,Maplebear Inc. Common Stock
 CAT,Caterpillar Inc.
@@ -13,53 +15,48 @@ CHDN,Churchill Downs Inc
 CLH,"Clean Harbors, Inc"
 CRH,CRH Public Limited Company
 CRM,"Salesforce, Inc."
-CSL,"Carlisle Companies, Inc."
+DAY,"Dayforce, Inc."
 DHI,D.R. Horton Inc.
-DKNG,DraftKings Inc. Class A Common Stock
-EME,"EMCOR Group, Inc."
 EMN,Eastman Chemical Company
-EVR,Evercore Inc.
+EQIX,"Equinix, Inc. Common Stock REIT"
 EXP,"Eagle Materials, Inc."
 FCNCA,First Citizens BancShares Inc
 FI,"Fiserv, Inc."
 FICO,Fair Isaac Corporation
 FSLR,"First Solar, Inc."
-GLOB,GLOBANT S.A.
+GOOG,Alphabet Inc. Class C Capital Stock
 GPK,Graphic Packaging Holding Company
 GWW,"W.W. Grainger, Inc."
 HUBB,Hubbell Incorporated
 HUBS,"HUBSPOT, INC."
-HUN,Huntsman Corporation
 IRM,Iron Mountain Inc.
-IT,"Gartner, Inc."
 KIM,Kimco Realty Corp.
 KKR,KKR & Co. Inc.
+LAMR,Lamar Advertising Co
 LEN,Lennar Corporation Class A
 LHX,"L3Harris Technologies, Inc."
 LII,Lennox International Inc.
-MANH,Manhattan Associates Inc
+LNW,"Light & Wonder, Inc. Common Stock"
 MLM,Martin Marietta Materials
 MSI,"Motorola Solutions, Inc. New"
+MUSA,MURPHY USA INC.
 NOW,"SERVICENOW, INC."
+NSC,Norfolk Southern Corp.
+NTAP,"NetApp, Inc"
 NVR,"NVR, Inc."
 OC,Owens Corning
-ODFL,Old Dominion Freight Line
 ORCL,Oracle Corp
 PCAR,Paccar Inc
-PH,Parker-Hannifin Corporation
 POST,"POST HOLDINGS, INC."
+REGN,Regeneron Pharmaceuticals Inc
 ROST,Ross Stores Inc
 RPM,"RPM International, Inc."
 SAIA,"Saia, Inc."
-SAM,Boston Beer Company
 TEAM,Atlassian Corporation Class A Common Stock
-TMO,"Thermo Fisher Scientific, Inc."
 TOL,"Toll Brothers, Inc."
 TSLA,"Tesla, Inc. Common Stock"
-UNH,UNITEDHEALTH GROUP INCORPORATED (Delaware)
 URI,"United Rentals, Inc."
 UTHR,United Therapeutics Corp
-VMI,"Valmont Industries, Inc."
-WAT,Waters Corp
 WLK,Westlake Corporation
+WSO,"Watsco, Inc."
 WST,"West Pharmaceutical Services, Inc."
